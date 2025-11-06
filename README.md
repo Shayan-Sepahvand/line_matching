@@ -1,5 +1,20 @@
 # Line Matching
-A KLT-based line segment matching algorithm.
+
+This repository provides a robust C++ implementation for matching line features between two images. The algorithm is designed for high accuracy and resilience to viewpoint changes, illumination variations, and minor occlusions, making it suitable for applications like Visual Odometry (VO), SLAM, and image stitching.
+
+### Core Techniques
+
+The matching pipeline leverages a combination of classic and modern computer vision techniques:
+
+1.  **Line Segment Detection**: Utilizes the **EDLines** algorithm for fast and accurate line segment extraction from images. A custom filtering step is applied to remove redundant parallel lines.
+
+2.  **KLT-Based Point Tracking**: Instead of using complex line descriptors, this method samples a series of "anchor points" along each line in the reference image. It then tracks these points into the current image using a **1D-constrained Kanade-Lucas-Tomasi (KLT) optical flow**. This approach tracks points along their line's normal direction, which is more efficient and constrained. If camera pose and intrinsics are available, **epipolar geometry** is used to provide a precise initial guess for the KLT tracker.
+
+3.  **Voting-Based Line Association**: A voting scheme aggregates the matches of individual anchor points to determine the corresponding line match. A line pair is considered a candidate match if it receives the majority of votes from the anchor points and satisfies a length consistency check.
+
+4.  **Topological Filtering**: To ensure high-quality matches, a crucial **topological consistency check** is performed. This filter validates that the relative spatial relationships (e.g., sideness, distance) between pairs of matched lines are preserved across both images. Any match that violates this structural consistency with a significant number of other matches is rejected as an outlier.
+
+This multi-stage approach, combining point-based tracking with strong geometric and topological constraints, results in a highly reliable line matching system.
 
 Related project: [EDLine Parallel](https://github.com/HanjieLuo/EDLine_parallel)
 
