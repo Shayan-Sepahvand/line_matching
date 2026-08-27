@@ -55,3 +55,32 @@ Test with EuRoc MAV dataset(MH_04_difficult):
 
 ## Contact information ##
 Hanjie Luo [luohanjie@gmail.com](mailto:luohanjie@gmail.com)
+
+
+## This only works with opencv3.4 ##
+
+```bash
+cd /home/shayan
+
+mkdir -p software
+cd software
+
+git clone --branch 3.4.20 --depth 1 \
+    https://github.com/opencv/opencv.git \
+    opencv-3.4.20
+
+
+cmake \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_INSTALL_PREFIX=home/ldetection/opencv34/opencv-3.4-install \
+    -D BUILD_TESTS=OFF \
+    -D BUILD_PERF_TESTS=OFF \
+    -D BUILD_EXAMPLES=OFF \
+    -D BUILD_opencv_python2=OFF \
+    -D BUILD_opencv_python3=OFF \
+    -D BUILD_JAVA=OFF \
+    ..
+
+```
+
+
