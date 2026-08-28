@@ -83,4 +83,15 @@ cmake \
 
 ```
 
+## HOT TO RUN
+
+
+
+```bash
+
+Usage:
+  ./test_line_matching <reference_image> <current_image>
+
+```
+
 
