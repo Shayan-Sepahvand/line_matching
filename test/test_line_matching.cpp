@@ -496,7 +496,7 @@ int main(int argc, char** argv)
         false;
 
     bool topological_filter =
-        true;
+        false;
 
     float filter_distance =
         3.0f;
@@ -549,8 +549,8 @@ int main(int argc, char** argv)
     cv::Mat K =
         (cv::Mat_<float>(3, 3) <<
 
-            436.23459, 0,         364.44122,
-            0,         436.23459, 256.95169,
+            643.56796071, 0,         326.71147937,
+            0,         640.86825351, 235.64925133,
             0,         0,         1
         );
 
@@ -558,17 +558,26 @@ int main(int argc, char** argv)
     // =========================================================================
     // EDLine parameters
     // ============================================================================
-
+// EDLineParam param =
+// {
+//     5,      // ksize
+//     1.0,    // sigma
+//     20,     // gradientThreshold   was 30
+//     3,      // anchorThreshold     was 5
+//     1,      // scanIntervals       was 2
+//     15,     // minLineLen          was 25
+//     2.5     // lineFitErrThreshold was 1.8
+// };
     EDLineParam param =
-    {
-        5,      // ksize
-        1.0,    // sigma
-        30,     // gradientThreshold
-        5,      // anchorThreshold
-        2,      // scanIntervals
-        25,     // minLineLen
-        1.8     // lineFitErrThreshold
-    };
+        {
+            5,
+            1.0,
+            15,
+            2,
+            1,
+            10,
+            3.0
+        };
 
 
     EDLineDetector line_detector(param);
