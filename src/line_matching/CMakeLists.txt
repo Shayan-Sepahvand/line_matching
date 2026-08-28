@@ -1,15 +1,33 @@
-find_package(OpenCV REQUIRED)
+# ============================================================================
+# Line matching library
+# ============================================================================
+# OpenCV is already found in the root CMakeLists.txt.
+# DO NOT call find_package(OpenCV ...) again here.
 
-include_directories(
-  ${OpenCV_INCLUDE_DIRS}
-  ${PROJECT_SOURCE_DIR}/thirdparty/opencv-3.4
+
+add_library(
+    line_matching
+    SHARED
+    line_matching.cpp
 )
 
 
-link_directories(
-  ${OpenCV_LIBRARY_DIRS}
+target_include_directories(
+    line_matching
+
+    PUBLIC
+
+        ${PROJECT_SOURCE_DIR}/include
+        ${OpenCV_INCLUDE_DIRS}
 )
 
 
-add_library(line_matching SHARED line_matching.cpp)
-target_link_libraries(line_matching klt EDLine ${OpenCV_LIBS})
+target_link_libraries(
+    line_matching
+
+    PUBLIC
+
+        klt
+        EDLine
+        ${OpenCV_LIBS}
+)
