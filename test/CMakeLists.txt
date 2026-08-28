@@ -1,17 +1,51 @@
-find_package(OpenCV REQUIRED)
+# OpenCV is already found in the root CMakeLists.txt.
+# Do NOT call find_package(OpenCV ...) again here.
 
-include_directories(
-  ${OpenCV_INCLUDE_DIRS}
-  ${PROJECT_SOURCE_DIR}/thirdparty/opencv-3.4
+# ============================================================================
+# EDLine test
+# ============================================================================
+
+add_executable(
+    test_edline_detector
+    test_edline_detector.cpp
 )
 
-link_directories(
-  ${OpenCV_LIBRARY_DIRS}
+target_include_directories(
+    test_edline_detector
+    PRIVATE
+        ${PROJECT_SOURCE_DIR}/include
+        ${OpenCV_INCLUDE_DIRS}
 )
 
-add_executable(test_edline_detector test_edline_detector.cpp)
-target_link_libraries(test_edline_detector EDLine ${OpenCV_LIBS})
+target_link_libraries(
+    test_edline_detector
+    PRIVATE
+        EDLine
+        ${OpenCV_LIBS}
+)
 
-add_executable(test_line_matching test_line_matching.cpp)
-target_link_libraries(test_line_matching line_matching ${OpenCV_LIBS})
 
+# ============================================================================
+# Line matching test
+# ============================================================================
+
+add_executable(
+    test_line_matching
+    test_line_matching.cpp
+)
+
+target_include_directories(
+    test_line_matching
+    PRIVATE
+        ${PROJECT_SOURCE_DIR}/include
+        ${OpenCV_INCLUDE_DIRS}
+)
+
+target_link_libraries(
+    test_line_matching
+    PRIVATE
+        line_matching
+        klt
+        EDLine
+        ${OpenCV_LIBS}
+)
