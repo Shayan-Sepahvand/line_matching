@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(LINE_MATCHING)
 
+set(
+    OpenCV_DIR
+    "/home/shayan/ldetection/opencv34/opencv-3.4.20/build"
+    CACHE PATH
+    "OpenCV 3.4 directory"
+    FORCE
+)
 
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
