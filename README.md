@@ -95,8 +95,9 @@ Usage:
 
 example
 
-  ./test_line_matching /home/shayan/ldetection/line_matching/data/mh04/imgs/1.png /home/shayan/ldetection/line_matching/data/mh04/imgs/4.png
-
+./test_line_matching \
+~/ldetection/line_matching/data/mh04/imgs/a.jpg \
+~/ldetection/line_matching/data/mh04/imgs/b.jpg
 ```
 
 do not forget to change the K matrix
